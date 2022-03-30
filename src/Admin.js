@@ -1,12 +1,13 @@
 import io from "socket.io-client";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useRef, useState } from "react";
-import { emit_clearState, emit_GetState, emit_PostTitle } from "./emitEvents";
+import { Emit } from "./emit";
 import { EVENTS } from "./constants";
 import { CSVLink } from "react-csv";
 
 const socket = io.connect("http://localhost:3001");
 
+// TODO: map real data to excel download
 const csvData = [
   ["firstname", "lastname", "email"],
   ["Ahmed", "Tomi", "ah@smthing.co.com"],
@@ -39,7 +40,7 @@ function Admin() {
       <h1 className={`text-sm font-bold`}>
         User Story{" "}
         <button
-          onClick={() => emit_clearState(socket)}
+          onClick={() => Emit.clearState(socket)}
           className={`text-xs mr-0 ml-auto bg-red-400 text-white py-1 px-2 rounded`}
         >
           CLEAR
@@ -56,7 +57,7 @@ function Admin() {
         />
         <button
           onClick={() => {
-            emit_PostTitle(socket, titleInput);
+            Emit.postTitle(socket, titleInput);
           }}
           className={`ml-1 text-xs mr-0 ml-auto bg-red-400 text-white py-1 px-2 rounded`}
         >
@@ -67,7 +68,7 @@ function Admin() {
         <h1 className={`mt-10 text-sm font-bold`}>
           Results{" "}
           <button
-            onClick={() => emit_GetState(socket)}
+            onClick={() => Emit.getState(socket)}
             className={`text-xs mr-0 ml-auto bg-red-400 text-white py-1 px-2 rounded`}
           >
             GET

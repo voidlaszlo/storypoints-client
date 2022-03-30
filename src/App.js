@@ -1,11 +1,12 @@
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
-import { emit_PostData, emit_JoinRoom } from "./emitEvents";
+import { Emit } from "./emit";
 import { EVENTS, POINTS } from "./constants";
 import { useParams } from "react-router-dom";
 
 const socket = io.connect("http://localhost:3001");
 
+// TODO: create custom hook for socket.io things
 function App() {
   const [title, setTitle] = useState("");
   const [selected, setSelected] = useState(0);
@@ -14,7 +15,7 @@ function App() {
   let { roomId } = useParams();
 
   useEffect(() => {
-    emit_JoinRoom(socket, roomId);
+    Emit.joinRoom(socket, roomId);
 
     socket.on(EVENTS.POST_DATA, (data) => {
       setState(data);
@@ -70,7 +71,7 @@ function App() {
         }`}
         disabled={disabled}
         onClick={() => {
-          emit_PostData(socket, selected, roomId, () => setDisabled(true));
+          Emit.postData(socket, selected, roomId, () => setDisabled(true));
         }}
       >
         Choose
