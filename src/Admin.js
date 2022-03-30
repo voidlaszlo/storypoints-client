@@ -20,11 +20,11 @@ function Admin() {
   const titleInput = useRef(null);
 
   useEffect(() => {
-    socket.on(EVENTS.POST_DATA_EVENT, (data) => {
+    socket.on(EVENTS.POST_DATA, (data) => {
       setState(data);
     });
 
-    socket.on(EVENTS.POST_TITLE_EVENT, (title) => {
+    socket.on(EVENTS.POST_TITLE, (title) => {
       setTitle(title);
     });
 

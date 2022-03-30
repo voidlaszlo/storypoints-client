@@ -1,25 +1,25 @@
 const { EVENTS } = require("./constants");
 
 const emit_JoinRoom = (socket, roomId) => {
-  socket.emit(EVENTS.JOIN_ROOM_EVENT, roomId);
+  socket.emit(EVENTS.JOIN_ROOM, roomId);
 };
 
 const emit_GetState = (socket) => {
-  socket.emit(EVENTS.GET_STATE_EVENT);
+  socket.emit(EVENTS.GET_STATE);
 };
 
 const emit_PostData = (socket, data, roomId, cb) => {
-  socket.emit(EVENTS.POST_DATA_EVENT, data, roomId);
+  socket.emit(EVENTS.POST_DATA, data, roomId);
   cb();
 };
 
 const emit_PostTitle = (socket, titleInput) => {
-  socket.emit(EVENTS.POST_TITLE_EVENT, titleInput.current.value);
+  socket.emit(EVENTS.POST_TITLE, titleInput.current.value);
   titleInput.current.value = "";
 };
 
 const emit_clearState = (socket) => {
-  socket.emit(EVENTS.CLEAR_STATE_EVENT);
+  socket.emit(EVENTS.CLEAR_STATE);
 };
 
 module.exports = {

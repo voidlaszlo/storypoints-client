@@ -16,12 +16,12 @@ function App() {
   useEffect(() => {
     emit_JoinRoom(socket, roomId);
 
-    socket.on(EVENTS.POST_DATA_EVENT, (data) => {
+    socket.on(EVENTS.POST_DATA, (data) => {
       setState(data);
       setSelected(0);
     });
 
-    socket.on(EVENTS.POST_TITLE_EVENT, (title) => {
+    socket.on(EVENTS.POST_TITLE, (title) => {
       setTitle(title);
 
       if (title === "") {
